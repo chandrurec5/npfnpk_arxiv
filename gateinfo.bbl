@@ -1,0 +1,47 @@
+\begin{thebibliography}{6}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Arora et~al.(2019)Arora, Du, Hu, Li, Salakhutdinov, and
+  Wang]{arora2019exact}
+Sanjeev Arora, Simon~S Du, Wei Hu, Zhiyuan Li, Russ~R Salakhutdinov, and
+  Ruosong Wang.
+\newblock On exact computation with an infinitely wide neural net.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  8139--8148, 2019.
+
+\bibitem[Cao and Gu(2019)]{cao2019generalization}
+Yuan Cao and Quanquan Gu.
+\newblock Generalization bounds of stochastic gradient descent for wide and
+  deep neural networks.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  10835--10845, 2019.
+
+\bibitem[Du and Hu(2019)]{dudln}
+Simon~S Du and Wei Hu.
+\newblock Width provably matters in optimization for deep linear neural
+  networks.
+\newblock \emph{arXiv preprint arXiv:1901.08572}, 2019.
+
+\bibitem[Du et~al.(2018)Du, Lee, Li, Wang, and Zhai]{dudnn}
+Simon~S Du, Jason~D Lee, Haochuan Li, Liwei Wang, and Xiyu Zhai.
+\newblock Gradient descent finds global minima of deep neural networks.
+\newblock \emph{arXiv preprint arXiv:1811.03804}, 2018.
+
+\bibitem[Jacot et~al.(2018)Jacot, Gabriel, and Hongler]{ntk}
+Arthur Jacot, Franck Gabriel, and Cl{\'e}ment Hongler.
+\newblock Neural tangent kernel: Convergence and generalization in neural
+  networks.
+\newblock In \emph{Advances in neural information processing systems}, pages
+  8571--8580, 2018.
+
+\bibitem[Shamir(2018)]{shamir}
+Ohad Shamir.
+\newblock Exponential convergence time of gradient descent for one-dimensional
+  deep linear neural networks.
+\newblock \emph{arXiv preprint arXiv:1809.08587}, 2018.
+
+\end{thebibliography}

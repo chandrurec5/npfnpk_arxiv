@@ -1,0 +1,82 @@
+\documentclass{article}
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2020
+
+% ready for submission
+% \usepackage{neurips_2020}
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+%     \usepackage[preprint]{neurips_2020}
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+%     \usepackage[final]{neurips_2020}
+
+% to avoid loading the natbib package, add option nonatbib:
+\usepackage[preprint]{neurips_2020}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{bbm}
+\input{pack.tex}
+\usepackage{hyperref}
+\usepackage{thmtools}
+\usepackage{nameref}
+
+\usepackage[nameinlink,noabbrev,capitalize]{cleveref}
+\crefname{assumption}{assumption}{assumptions}
+\crefname{lemma}{lemma}{lemmas}
+\Crefname{lemma}{Lemma}{Lemmas}
+\crefname{thm}{theorem}{theorems}
+\Crefname{thm}{Theorem}{Theorems}
+\crefname{proposition}{proposition}{propositions}
+
+
+
+\usepackage{caption}
+\captionsetup{belowskip=0pt}
+\usepackage{wrapfig,lipsum}
+\usepackage[linewidth=1.2pt,linecolor=red]{mdframed}
+
+
+\usepackage{comment}
+\usepackage{cancel}
+\usepackage{changepage}
+\usepackage{bbm}
+\usepackage{pgfplots}
+\usepackage{filecontents}
+\setcounter{MaxMatrixCols}{32}
+\usepackage{placeins}
+
+\title{Neural Path Features and Neural Path Kernel : Understanding the role of gates in deep learning}
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+\author{Chandrashekar Lakshminarayanan${}^*$ and Amit Vikram Singh\thanks{Both authors contributed equally.},\\ Indian Institute of Technology Palakkad\\\{chandru@iitpkd.ac.in,amitkvikram@gmail.com\}}
+\begin{document}
+\maketitle
+\input{abstract}
+\input{intro}
+\input{npf}
+\input{npk}
+\input{gatedyna}
+\input{decoupled}
+\input{infomeasure}
+\input{experiments}
+
+%\input{broad}
+%\input{supp}
+\input{appendix}
+
+\end{document}

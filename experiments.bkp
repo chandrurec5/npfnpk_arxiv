@@ -1,0 +1,40 @@
+\section{Experiments}\label{sec:experiments} In this section, we experimentally verify ``Claim II'', that is, dynamics of the gates is key for generalisation. We compare the performance of the following networks on standard MNIST and CIFAR-10 datasets: i) fixed random (FRNPF): in the DGN, we randomly initialise both $\Tg_0,\Tv_0$, make $\Tg$ \emph{non-trainable} and train only $\Tv$ , ii) fixed learnt (FLNPF): we initialise $\Tv_0$ randomly, and copy weights from a pre-trained ReLU network (of identical architecture) into $\Tg_0$. Similar to FR case, $\Tg$ is non-trainable and only $\Tv$ is trained iii) decoupled earning (DNPFL):  we randomly initialise both $\Tg_0,\Tv_0$, and train both $\Tg$ and $\Tv$, iv) Standard ReLU (ReLU).  The results of our experiments on CIFAR-10 (please look at the \Cref{tb:npfs} for complete results in CIFAR-10 as well as MNIST) that supports ``Claim $2$'' can be summarised as below:
+
+$1.$ FRNPF trains and generalises ($66.81\%$), but ReLU ($80.32\%$) and DNPFL ($77.12\%$) perform better. This clearly shows that dynamics in the gates is key for generalisation.
+
+$2.$ FLNPF with weights copied from a fully trained ReLU performs close to $79.28\%$ which is almost as good as ReLU ($80.32\%$). Since from \Cref{th:main} we know that the generalisation performance of the fixed NPF learner is characterised by its NPK, and the fact that FLNPF almost recovers the performance of ReLU, we observe that \emph{almost all the information learnt by a standard ReLU DNN is stored in its gates}. 
+
+$3.$ The NPFs are learnt continuously during the training, and the performance gap between FRNPF and ReLU is continuous. We trained a DNN with ReLU (parameterised by $\bar{\Theta}$) for $60$ epochs, and we obtained $6$ different weights at various \emph{stages} of the training process. Stage $1$: $\bar{\Theta}_{10}$, stage $2$: $\bar{\Theta}_{20}$, stage $3$: $\bar{\Theta}_{30}$, stage $4$: $\bar{\Theta}_{40}$, stage $5$: $\bar{\Theta}_{50}$, stage $6$: $\bar{\Theta}_{60}$. We copy these weights obtained at various stages of training to setup $6$ different FLNPFs, i.e., FLNPF-$1$ to FLNPF-$6$. We observe that the performance of FLNPF-$1$ to FLNPF-$6$ increases monotonically, with FLNPF-$1$ performing $72\%$ which is better than FRNPF (i.e., $66.81\%$),  and FLNPF-$6$ performing as well as ReLU (see \Cref{fig:dynamics}). The performance of the Convolutional NTK based pure kernel method in \cite{arora2019exact} is $77.43\%$. Thus through its various stages, the FLNPF starts from below $77.43\%$ and surpasses to reach $79.28\%$, which implies the difference in performance is clearly coming from learning of NPFs.
+\FloatBarrier
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{figs/gap.png}
+\includegraphics[scale=0.25]{figs/path-gram.png}
+\includegraphics[scale=0.25]{figs/kvkphi.png}
+\caption{Dynamics of Learning}
+\label{fig:dynamics}
+\end{figure}
+
+\textbf{NPK during training:} We considered ``Binary''-MNIST data set with two classes namely digits $4$ and $7$, with the labels taking values in $\{-1,+1\}$ and squared loss. We trained a standard DNN with ReLU activation ($w=100$, $d=5$). Let $\widehat{H}_t=\frac{1}{trace(H_t)}H_t$ be the normalised NPK matrix. For a subset size, $n'=200$ ($100$ examples per class) we plot $\nu_t=y^\top (\widehat{H}_t)^{-1} y$, (where $y\in\{-1,1\}^{200}$ is the labelling function), and observe that $\nu_t$ reduces as training proceeds (see \Cref{fig:gen}). Note that, $\nu_t=\sum_{i=1}^{n'}(u_{i,t}^\top y)^2 (\hat{\rho}_{i,t})^{-1}$, where $u_{i,t}\in \R^{n'}$ are the orthonormal eigenvectors of $\widehat{H}_t$ and $\hat{\rho}_{i,t},i\in[n']$ are the corresponding eigenvalues. Since $\sum_{i=1}^{n'}\hat{\rho}_{i,t}=1$, the only way $\nu_t$ reduces is when more and more energy gets concentrated on $\hat{\rho}_{i,t}$s for which $(u_{i,t}^\top y)^2$s are also high.
+
+\textbf{Role of} $\kv$ and $\kf$: In this case the of decoupled learning, NTK is given by $K_{\Tdgn}=K^{\text{V}}_{\Tdgn}+K^{\text{F}}_{\Tdgn}$. For MNIST, we compared $K^{\text{V}}_{\Tdgn}$ and $K^{\text{F}}_{\Tdgn}$ using their trace and Frobenius norms, and we observe that $K^v_{\Theta}$ and $K^{\phi}_{\Tg}$ are in the same scale, which is perhaps pointing to the fact that both $K^v_{\Theta}$ and $K^{\phi}_{\Tg}$ are equally important for obtaining good generalisation performance. 
+\subsection{Experimental Setup} 
+We used standard datasets namely MNIST and CIFAR-10, with categorical cross entropy loss. We used stochastic gradient descent (SGD) and \emph{Adam}. In the case of SGD, we tried constant step-sizes in the set $\{0.1,0.01,0.001\}$ and chose the best. In the case of Adam the we used a constant step size of $3e^{-4}$. In both cases, we used batch size to be $32$. We used a fully connected (FC) DNN with $(w=128,d=6)$ for MNIST.
+To train CIFAR-10, we used \emph{Vanilla-Convolutional} Network (VCONV) without pooling, residual connections, dropout or batch-normalisations, and is given by: input layer is $(32, 32, 3)$, followed by convolution layers with a stride of $(3, 3)$ and channels $64$, $64$, $128$, $128$ followed by a flattening to layer with $256$ hidden units, followed by a fully connected layer with $256$ units, and finally a  $10$ width soft-max layer to produce the final predictions. To train CIFAR-10, we also used a GCONV which is same as VCONV with a \emph{global-average-pooling} (GAP) layer. 
+For both FRNPF, and FLNPF, we let $\chi^\text{F}=\chi_r$, and $G_{x,t}(l)= \gamma_{r}\left(q^\text{F}_{x,t}(l)\right)$. In the case of FRNPF, we considered two possible initialisations namely i) \emph{independent initialisation} (II), i.e., $\Tg_0$ and $\Theta_0$ are statistically independent, and ii) \emph{dependent initialisation} (DI), i.e., $\Tg_0=\Theta_0$, a case which mimics the NPFs and NPVs of a standard DNN with ReLU activations. In the case of FLNPF, $\Tg_0=\bar{\Theta}$, where $\bar{\Theta}$ is the parameter of a pre-trained (could be in various stages of training) DNN with ReLU activations. In the case, DNPFL, we let $\chi^\text{F}=\chi_r$, and $G_{x,t}(l)= \gamma_{sr}\left(q^\text{F}_{x,t}(l)\right)$ with $\beta=8$.  The use of soft-ReLU makes it straightforward for the feature gradients to flow via the gating network.
+%\FloatBarrier
+ \begin{table}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|c|c|c|c|c|c|c|c|}\hline
+Arch			&Optimiser	&Dataset		&FRNPF (II) 			&FRNPF (DI)			&DNPFL					&FLNPF						&ReLU\\\hline
+FC			&SGD		&MNIST 		&$95.85\pm0.10$		&$95.85\pm0.17$		&$97.86\pm0.11$			&$97.10\pm0.09$				&$97.85\pm0.09$\\\hline
+FC			&Adam		&MNIST 		&$96.02\pm0.13$		&$96.09\pm0.12$		&$\mathbf{98.22\pm0.05}$	&$\mathbf{97.82\pm0.02}$		&$\mathbf{98.14\pm0.07}$\\\hline
+VCONV		&SGD		&CIFAR-$10$	&$58.92\pm0.62$		&$58.83\pm0.27$ 		&$63.21\pm0.07$			&$63.06\pm0.73$				&$67.02\pm0.43$\\\hline
+VCONV		&Adam		&CIFAR-$10$	&$64.86\pm1.18$		&$64.68\pm0.84$		&$\mathbf{69.45\pm0.76}$	&$\mathbf{71.4\pm0.47}$			&$\mathbf{72.43\pm0.54}$\\\hline
+GCONV	&SGD		&CIFAR-$10$	&$67.36\pm0.56$		&$66.86\pm0.44$		&$\mathbf{74.57\pm0.43}$			&$\mathbf{78.52\pm0.39}$				&$\mathbf{78.90\pm0.37}$\\\hline
+GCONV	&Adam		&CIFAR-$10$	&$66.42\pm0.44$		&$66.81\pm0.75$		&$\mathbf{77.12\pm0.19}$	&$\mathbf{79.28\pm0.13}$		&$\mathbf{80.32\pm0.13}$\\\hline
+\end{tabular}
+}
+\caption{Shows the training and generalisation performance of various NPFs.}
+\label{tb:npfs}
+\end{table}

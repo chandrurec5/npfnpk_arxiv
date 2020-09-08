@@ -1,0 +1,113 @@
+\begin{thebibliography}{16}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Arora et~al.(2019{\natexlab{a}})Arora, Du, Hu, Li, Salakhutdinov, and
+  Wang]{arora2019exact}
+Sanjeev Arora, Simon~S Du, Wei Hu, Zhiyuan Li, Russ~R Salakhutdinov, and
+  Ruosong Wang.
+\newblock On exact computation with an infinitely wide neural net.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  8139--8148, 2019{\natexlab{a}}.
+
+\bibitem[Arora et~al.(2019{\natexlab{b}})Arora, Du, Hu, Li, and Wang]{arora}
+Sanjeev Arora, Simon~S Du, Wei Hu, Zhiyuan Li, and Ruosong Wang.
+\newblock Fine-grained analysis of optimization and generalization for
+  overparameterized two-layer neural networks.
+\newblock \emph{arXiv preprint arXiv:1901.08584}, 2019{\natexlab{b}}.
+
+\bibitem[Balestriero et~al.(2018)]{balestriero2018spline}
+Randall Balestriero et~al.
+\newblock A spline theory of deep learning.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  374--383, 2018.
+
+\bibitem[Cao and Gu(2019)]{cao2019generalization}
+Yuan Cao and Quanquan Gu.
+\newblock Generalization bounds of stochastic gradient descent for wide and
+  deep neural networks.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  10835--10845, 2019.
+
+\bibitem[Du and Hu(2019)]{dudln}
+Simon~S Du and Wei Hu.
+\newblock Width provably matters in optimization for deep linear neural
+  networks.
+\newblock \emph{arXiv preprint arXiv:1901.08572}, 2019.
+
+\bibitem[Du et~al.(2018)Du, Lee, Li, Wang, and Zhai]{dudnn}
+Simon~S Du, Jason~D Lee, Haochuan Li, Liwei Wang, and Xiyu Zhai.
+\newblock Gradient descent finds global minima of deep neural networks.
+\newblock \emph{arXiv preprint arXiv:1811.03804}, 2018.
+
+\bibitem[Fiat et~al.(2019)Fiat, Malach, and Shalev{-}Shwartz]{sss}
+Jonathan Fiat, Eran Malach, and Shai Shalev{-}Shwartz.
+\newblock Decoupling gating from linearity.
+\newblock \emph{CoRR}, abs/1906.05032, 2019.
+\newblock URL \url{http://arxiv.org/abs/1906.05032}.
+
+\bibitem[Frankle and Carbin(2018)]{lottery}
+Jonathan Frankle and Michael Carbin.
+\newblock The lottery ticket hypothesis: Finding sparse, trainable neural
+  networks.
+\newblock \emph{arXiv preprint arXiv:1803.03635}, 2018.
+
+\bibitem[Jacot et~al.(2018)Jacot, Gabriel, and Hongler]{ntk}
+Arthur Jacot, Franck Gabriel, and Cl{\'e}ment Hongler.
+\newblock Neural tangent kernel: Convergence and generalization in neural
+  networks.
+\newblock In \emph{Advances in neural information processing systems}, pages
+  8571--8580, 2018.
+
+\bibitem[Jacot et~al.(2019)Jacot, Gabriel, and Hongler]{jacot2019freeze}
+Arthur Jacot, Franck Gabriel, and Cl{\'e}ment Hongler.
+\newblock Freeze and chaos for dnns: an ntk view of batch normalization,
+  checkerboard and boundary effects.
+\newblock \emph{arXiv preprint arXiv:1907.05715}, 2019.
+
+\bibitem[Lee et~al.(2019)Lee, Xiao, Schoenholz, Bahri, Novak, Sohl-Dickstein,
+  and Pennington]{lee2019wide}
+Jaehoon Lee, Lechao Xiao, Samuel Schoenholz, Yasaman Bahri, Roman Novak, Jascha
+  Sohl-Dickstein, and Jeffrey Pennington.
+\newblock Wide neural networks of any depth evolve as linear models under
+  gradient descent.
+\newblock In \emph{Advances in neural information processing systems}, pages
+  8570--8581, 2019.
+
+\bibitem[Neyshabur et~al.(2015)Neyshabur, Salakhutdinov, and
+  Srebro]{neyshabur2015path}
+Behnam Neyshabur, Russ~R Salakhutdinov, and Nati Srebro.
+\newblock Path-sgd: Path-normalized optimization in deep neural networks.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  2422--2430, 2015.
+
+\bibitem[Ramanujan et~al.(2019)Ramanujan, Wortsman, Kembhavi, Farhadi, and
+  Rastegari]{edgepop}
+Vivek Ramanujan, Mitchell Wortsman, Aniruddha Kembhavi, Ali Farhadi, and
+  Mohammad Rastegari.
+\newblock What's hidden in a randomly weighted neural network?
+\newblock \emph{arXiv preprint arXiv:1911.13299}, 2019.
+
+\bibitem[Saxe et~al.(2013)Saxe, McClelland, and Ganguli]{ganguli}
+Andrew~M Saxe, James~L McClelland, and Surya Ganguli.
+\newblock Exact solutions to the nonlinear dynamics of learning in deep linear
+  neural networks.
+\newblock \emph{arXiv preprint arXiv:1312.6120}, 2013.
+
+\bibitem[Shamir(2019)]{shamir}
+Ohad Shamir.
+\newblock Exponential convergence time of gradient descent for one-dimensional
+  deep linear neural networks.
+\newblock In \emph{Conference on Learning Theory}, pages 2691--2713, 2019.
+
+\bibitem[Srivastava et~al.(2014)Srivastava, Masci, Gomez, and
+  Schmidhuber]{srivastava2014understanding}
+Rupesh~Kumar Srivastava, Jonathan Masci, Faustino Gomez, and J{\"u}rgen
+  Schmidhuber.
+\newblock Understanding locally competitive networks.
+\newblock \emph{arXiv preprint arXiv:1410.1165}, 2014.
+
+\end{thebibliography}

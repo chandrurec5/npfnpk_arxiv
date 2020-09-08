@@ -1,0 +1,45 @@
+\section{Neural Path Feature and Kernel: Encoding Gating Information}\label{sec:path}
+%First step in understanding the role of gates is to explicitly \emph{encode} the $1/0$ states of the gates. 
+The gating property of the ReLU activation allows us to express the output of the DNN as a summation of the contribution of the individual paths, and paves a natural way to encode the $1/0$ states of the gates \emph{without loss of information}. The contribution of a path is the product of the signal in its input node, the `$d$' weights in the path and the `$(d-1)$' gates in the path. For an input $x\in\R^{d_{in}}$, and parameter $\Theta\inrdnet$, 
+we encode the gating information in a novel \emph{neural path feature} (NPF), $\phi_{x,\Theta}\in\R^P$ and the weights in a novel \emph{neural path value} (NPV) $v_{\Theta}\in\R^P$, where, $P=d_{in}w^{(d-1)}$ is the total number of paths. 
+The NPF co-ordinate of a path is the product of the signal at its input node and the gates in the path. The NPV co-ordinate of a path is the product of the weights in the paths. %This allows us to express the output of the DNN as an inner product of the NPFs and NPVs, i.e., $\hat{y}_{\Theta}(x)=\ip{\phi_{x,\Theta},v_{\Theta}}$. 
+By stacking the NPFs of all the input examples we obtain the NPF matrix as $\Phi_{\Theta}=(\phi_{x_s,\Theta},s\in[n])\in\R^{P\times n}$. Then the input-output relationship of a DNN in vector form is given by:
+\begin{align}\label{eq:npfnpv}
+\hat{y}_{\Theta}=\Phi^\top_{\Theta} v_{\Theta},
+\end{align}
+where the NPF matrix $\Phi_{\Theta}$ can also be interpreted as the \emph{hidden feature matrix} which along with $v_{\Theta}$ is learnt during gradient descent on $\Theta\inrdnet$. %changes both quantities $\Phi_{\Theta}$ and $v_{\Theta}$, of which, $\Phi_{\Theta}$ captures the information in the gates. %Further, the NPV is a $P$ dimensional quantity, however, loosely speaking, its `degrees of freedom' is restricted by its parameter $\Theta$, whose dimension is $d_{net}$. 
+\begin{comment}
+The associated \emph{neural path kernel} (NPK) matrix defined as $H_{\Theta}=\Phi_{\Theta}^\top \Phi_{\Theta}$, has a special property, in that, it can be written as the \emph{Hadamard} product of the input Gram matrix $\Sigma$, and matrix $\Lambda_{\Theta}$ which is a correlation matrix of active sub-networks. Note that $\Sigma$ is a constant, while $\Lambda_{\Theta}$ is learnt during training.
+\end{comment}
+\subsection{Paths, Neural Path Feature, Neural Path Value and Network Output}
+\begin{table}[h]
+\centering
+\begin{tabular}{|c l lll|}\hline
+Input Layer&: &$z_{x,\Theta}(0)$ &$=$ &$x$ \\
+Pre-Activation&: & $q_{x,\Theta}(l,i)$& $=$ & ${\Theta(l,\cdot,i)}^\top z_{x,\Theta}(l-1), l\in[d-1],i\in[w]$\\
+Gating Values&: &$G_{x,\Theta}(l,i)$& $=$ & $\gamma_r(q_{x,\Theta}(l,i)), l\in[d-1],i\in[w],\, \text{where}\,\gamma_r(q)=\mathbbm{1}_{\{q>0\}}$ \\
+Hidden Layer&: &$z_{x,\Theta}(l,i)$ & $=$ & $\chi_r(q_{x,\Theta}(l,i))= q_{x,\Theta}(l,i)\cdot G_{x,\Theta}(l,i), l\in[d-1],i\in[w]$ \\
+Final Output&: & $\hat{y}_{\Theta}(x)$ & $=$ & ${\Theta(d)}^\top z_{x,\Theta}(d-1)$\\\hline
+\end{tabular}
+\caption{DNN with ReLU activation. Here, $x\in\R^{d_{in}}$ is the input to the DNN, and   $\hat{y}_{\Theta}(x)$ is the output, `$q$'s are pre-activation inputs, `$z$'s are output of the hidden layers, `$G$'s are the gating values. $l\in[d-1]$ is the index of the layer, and $i\in[w]$ is the index of the hidden units in a layer.}
+\label{tb:basic}
+\end{table}
+A path starts from an input node, passes through exactly one weight (and one hidden node) in each layer and ends at the output node. We have a total of $P=d_{in}w^{(d-1)}$ paths. Let us say that an enumeration of the paths is given by $[P]=\{1,\ldots,P\}$. Let $\I_{l}\colon [P]\ra [w],l=0,\ldots,d-1$ provide the index of the hidden unit through which a path $p$ passes in layer $l$ (with the convention that $\I_d(p)=1,\forall p\in [P]$). 
+%\subsection{Neural Path Feature, Neural Path Value and Network Output}
+\begin{definition}\label{def:nps} Let $x\in\R^{d_{in}}$ be the input to the DNN. For this input, 
+
+(i) The activity of a path $p$ is given by : $A_{\Theta}(x,p)\stackrel{def}{=}\Pi_{l=1}^{d-1} G_{x,\Theta}(l,\I_l(p))$.
+
+(ii) The {neural path feature} (NPF) is given by :  $\phi_{x,\Theta}\stackrel{def}=\left(x(\I_0(p))A_{\Theta}(x_s,p) ,p\in[P]\right)\in\R^P$. 
+
+(iii) The {neural path value} (NPV) if given by : $v_{\Theta}\stackrel{def}=\left(\Pi_{l=1}^d \Theta(l,\I_{l-1}(p),\I_l(p)),p\in[P]\right)\in\R^P$.
+\end{definition}
+A path $p$ is active if all the gates in the paths are on.
+\begin{comment}
+\begin{proposition}
+In DNNs without any bias, the NPFs are \emph{positively homogeneous}, i.e., $\phi_{cx,\Theta}=c\phi_{x,\Theta},\forall c>0, x\in\R^{d_{in}}$. 
+\end{proposition}
+\end{comment}
+\begin{proposition}\label{prop:zero}  The output of the network can be written as an inner product of the NPF and NPV, i.e., 
+$\hat{y}_{\Theta}(x)=\ip{\phi_{x,\Theta},v_{\Theta}}=\sum_{p\in [P]}x(\I_0(p))A_{\Theta}(x,p)v_{\Theta}(p)$.
+\end{proposition}

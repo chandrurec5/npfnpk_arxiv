@@ -1,0 +1,191 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\zref@newlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}}
+\citation{ntk,arora2019exact,cao2019generalization,dudnn}
+\citation{arora2019exact}
+\citation{ntk,dudnn,arora2019exact,cao2019generalization}
+\citation{arora2019exact}
+\citation{arora2019exact}
+\citation{cao2019generalization}
+\citation{arora2019exact}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Background: Neural Tangent Feature and Kernel}{2}{subsection.1.1}}
+\newlabel{sec:background}{{1.1}{2}{Background: Neural Tangent Feature and Kernel}{subsection.1.1}{}}
+\newlabel{sec:background@cref}{{[subsection][1][1]1.1}{[1][2][]2}}
+\newlabel{prop:basic}{{1.1}{2}{\textbf {Lemma 3.1} \cite {arora2019exact}}{proposition.1.1}{}}
+\newlabel{prop:basic@cref}{{[proposition][1][1]1.1}{[1][2][]2}}
+\citation{ntk,arora2019exact,cao2019generalization}
+\citation{arora2019exact}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Our Contributions}{3}{subsection.1.2}}
+\newlabel{sec:contrib}{{1.2}{3}{Our Contributions}{subsection.1.2}{}}
+\newlabel{sec:contrib@cref}{{[subsection][2][1]1.2}{[1][2][]3}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Neural Path Feature and Kernel: Encoding Gating Information}{3}{section.2}}
+\newlabel{sec:path}{{2}{3}{Neural Path Feature and Kernel: Encoding Gating Information}{section.2}{}}
+\newlabel{sec:path@cref}{{[section][2][]2}{[1][3][]3}}
+\newlabel{eq:npfnpv}{{1}{3}{Neural Path Feature and Kernel: Encoding Gating Information}{equation.2.1}{}}
+\newlabel{eq:npfnpv@cref}{{[equation][1][]1}{[1][3][]3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Paths, Neural Path Feature, Neural Path Value and Network Output}{3}{subsection.2.1}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces DNN with ReLU activation. Here, $x\in \mathbb  {R}^{d_{in}}$ is the input to the DNN, and $\mathaccentV {hat}05E{y}_{\Theta }(x)$ is the output, `$q$'s are pre-activation inputs, `$z$'s are output of the hidden layers, `$G$'s are the gating values. $l\in [d-1]$ is the index of the layer, and $i\in [w]$ is the index of the hidden units in a layer.\relax }}{4}{table.caption.2}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tb:basic}{{1}{4}{DNN with ReLU activation. Here, $x\in \R ^{d_{in}}$ is the input to the DNN, and $\hat {y}_{\Theta }(x)$ is the output, `$q$'s are pre-activation inputs, `$z$'s are output of the hidden layers, `$G$'s are the gating values. $l\in [d-1]$ is the index of the layer, and $i\in [w]$ is the index of the hidden units in a layer.\relax }{table.caption.2}{}}
+\newlabel{tb:basic@cref}{{[table][1][]1}{[1][3][]4}}
+\newlabel{def:nps}{{2.1}{4}{}{definition.2.1}{}}
+\newlabel{def:nps@cref}{{[definition][1][2]2.1}{[1][4][]4}}
+\newlabel{prop:zero}{{2.1}{4}{}{proposition.2.1}{}}
+\newlabel{prop:zero@cref}{{[proposition][1][2]2.1}{[1][4][]4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A toy illustration of gates, paths and active sub-networks. The cartoon (\textbf  {a}) in the top left corner shows a DNN with $2$ hidden layers, $6$ ReLU gates $G(l,i),l=1,2,i=1,2,3$, $2$ input nodes $x(1)$ and $x(2)$ and an output node $\mathaccentV {hat}05E{y}_{\Theta }(x)$. Cartoons (\textbf  {b}) to (\textbf  {g}) show the enumeration of the paths $p_1,\ldots  , p_{18}$. Cartoons (\textbf  {h}), (\textbf  {i}) and (\textbf  {j}) show hypothetical gates for $3$ different hypothetical input examples $\{x_s\}_{s=1}^3 \in \mathbb  {R}^2$. In each of the cartoons (\textbf  {h}), (\textbf  {i}) and (\textbf  {j}), the $1/0$ inside the circles denotes the on/off state of the gates, and the bold paths/gates shown in red colour constitute the active sub-network for that particular input example. The NPFs are given by $\phi _{x}=[x(1)A(x,p_1),\ldots  ,x(1)A(x,p_{9}),x(2)A(x,p_{10}),\ldots  ,x(2)A(x,p_{18})]^\top $.Here, $\Lambda (1,2)=1$ because paths $p_3$ and $p_{12}$ are both active for input examples $x_1$ and $x_2$ and the input dimension is $2$.\relax }}{4}{figure.caption.3}}
+\newlabel{fig:npkexample}{{1}{4}{A toy illustration of gates, paths and active sub-networks. The cartoon (\textbf {a}) in the top left corner shows a DNN with $2$ hidden layers, $6$ ReLU gates $G(l,i),l=1,2,i=1,2,3$, $2$ input nodes $x(1)$ and $x(2)$ and an output node $\hat {y}_{\Theta }(x)$. Cartoons (\textbf {b}) to (\textbf {g}) show the enumeration of the paths $p_1,\ldots , p_{18}$. Cartoons (\textbf {h}), (\textbf {i}) and (\textbf {j}) show hypothetical gates for $3$ different hypothetical input examples $\{x_s\}_{s=1}^3 \in \R ^2$. In each of the cartoons (\textbf {h}), (\textbf {i}) and (\textbf {j}), the $1/0$ inside the circles denotes the on/off state of the gates, and the bold paths/gates shown in red colour constitute the active sub-network for that particular input example. The NPFs are given by $\phi _{x}=[x(1)A(x,p_1),\ldots ,x(1)A(x,p_{9}),x(2)A(x,p_{10}),\ldots ,x(2)A(x,p_{18})]^\top $.Here, $\Lambda (1,2)=1$ because paths $p_3$ and $p_{12}$ are both active for input examples $x_1$ and $x_2$ and the input dimension is $2$.\relax }{figure.caption.3}{}}
+\newlabel{fig:npkexample@cref}{{[figure][1][]1}{[1][4][]4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Neural Path Kernel : Similarity based on active sub-networks}{4}{subsection.2.2}}
+\newlabel{def:lambda}{{2.2}{4}{}{definition.2.2}{}}
+\newlabel{def:lambda@cref}{{[definition][2][2]2.2}{[1][4][]4}}
+\citation{shamir,dudln}
+\newlabel{lm:npk}{{2.1}{5}{}{lemma.2.1}{}}
+\newlabel{lm:npk@cref}{{[lemma][1][2]2.1}{[1][5][]5}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Dynamics of Gradient Descent with NPF and NPV Learning}{5}{section.3}}
+\newlabel{sec:gatedyna}{{3}{5}{Dynamics of Gradient Descent with NPF and NPV Learning}{section.3}{}}
+\newlabel{sec:gatedyna@cref}{{[section][3][]3}{[1][5][]5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}NPV and NPF Learning}{5}{subsection.3.1}}
+\newlabel{def:npvgrad}{{3.1}{5}{}{definition.3.1}{}}
+\newlabel{def:npvgrad@cref}{{[definition][1][3]3.1}{[1][5][]5}}
+\newlabel{def:switch}{{3.3}{5}{}{definition.3.3}{}}
+\newlabel{def:switch@cref}{{[definition][3][3]3.3}{[1][5][]5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Gradient Descent}{5}{subsection.3.2}}
+\newlabel{prop:ntknew}{{3.1}{5}{}{proposition.3.1}{}}
+\newlabel{prop:ntknew@cref}{{[proposition][1][3]3.1}{[1][5][]5}}
+\newlabel{prop:dnnhard}{{3.2}{5}{}{proposition.3.2}{}}
+\newlabel{prop:dnnhard@cref}{{[proposition][2][3]3.2}{[1][5][]5}}
+\newlabel{prop:condition}{{3.3}{5}{}{proposition.3.3}{}}
+\newlabel{prop:condition@cref}{{[proposition][3][3]3.3}{[1][5][]5}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Deep Gated Networks: Decoupling Neural Path Feature and Value}{6}{section.4}}
+\newlabel{sec:decoupled}{{4}{6}{Deep Gated Networks: Decoupling Neural Path Feature and Value}{section.4}{}}
+\newlabel{sec:decoupled@cref}{{[section][4][]4}{[1][5][]6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Deep gated network (DGN) setup. The pre-activations $q^{\text  {F}}_{x,t}(l)$ of layer $l\in [d-1]$ from the feature network are used to derive the gating values $G_{x,t}(l)$ of layer $l\in [d-1]$. \relax }}{6}{figure.caption.5}}
+\newlabel{fig:dgn}{{2}{6}{Deep gated network (DGN) setup. The pre-activations $q^{\text {F}}_{x,t}(l)$ of layer $l\in [d-1]$ from the feature network are used to derive the gating values $G_{x,t}(l)$ of layer $l\in [d-1]$. \relax }{figure.caption.5}{}}
+\newlabel{fig:dgn@cref}{{[figure][2][]2}{[1][6][]6}}
+\newlabel{prop:dgn}{{4.1}{6}{Gradient Dynamics in a DGN}{proposition.4.1}{}}
+\newlabel{prop:dgn@cref}{{[proposition][1][4]4.1}{[1][6][]6}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Learning with Fixed NPFs: Role Of Active Sub-Networks}{6}{section.5}}
+\newlabel{sec:infomeasure}{{5}{6}{Learning with Fixed NPFs: Role Of Active Sub-Networks}{section.5}{}}
+\newlabel{sec:infomeasure@cref}{{[section][5][]5}{[1][6][]6}}
+\newlabel{def:gateinfo}{{5.1}{6}{}{definition.5.1}{}}
+\newlabel{def:gateinfo@cref}{{[definition][1][5]5.1}{[1][6][]6}}
+\citation{arora2019exact}
+\citation{ntk,arora2019exact,cao2019generalization}
+\citation{ntk,arora2019exact,cao2019generalization}
+\citation{arora2019exact}
+\citation{arora2019exact}
+\citation{arora2019exact}
+\citation{arora2019exact}
+\newlabel{assmp:main}{{5.1}{7}{}{assumption.5.1}{}}
+\newlabel{assmp:main@cref}{{[assumption][1][5]5.1}{[1][7][]7}}
+\newlabel{th:main}{{5.1}{7}{}{theorem.5.1}{}}
+\newlabel{th:main@cref}{{[theorem][1][5]5.1}{[1][7][]7}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Experiments: Fixed NPFs, NPF Learning and Verification of Claim II}{7}{section.6}}
+\newlabel{sec:experiments}{{6}{7}{Experiments: Fixed NPFs, NPF Learning and Verification of Claim II}{section.6}{}}
+\newlabel{sec:experiments@cref}{{[section][6][]6}{[1][7][]7}}
+\citation{ntk}
+\citation{jacot2019freeze}
+\citation{jacot2019freeze}
+\citation{arora2019exact}
+\citation{arora2019exact}
+\citation{arora2019exact,lee2019wide}
+\citation{arora,cao2019generalization}
+\citation{dudnn}
+\citation{dudln,shamir,ganguli}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Dynamics of NPF Learning. \relax }}{8}{figure.caption.7}}
+\newlabel{fig:dynamics}{{3}{8}{Dynamics of NPF Learning. \relax }{figure.caption.7}{}}
+\newlabel{fig:dynamics@cref}{{[figure][3][]3}{[1][7][]8}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Shows the generalisation performance of different NPFs learning settings. The values in the table are averaged over $5$ runs. Here, FC is a fully connected network with $w=100$ and $d=5$. VCONV and GCONV denote Vanilla CNN and CNN with GAP respectively. Please check \Cref  {sec:expsetup} for details on architecture of VCONV and GCONV, and the hyper-parameters.\relax }}{8}{table.caption.8}}
+\newlabel{tb:npfs}{{2}{8}{Shows the generalisation performance of different NPFs learning settings. The values in the table are averaged over $5$ runs. Here, FC is a fully connected network with $w=100$ and $d=5$. VCONV and GCONV denote Vanilla CNN and CNN with GAP respectively. Please check \Cref {sec:expsetup} for details on architecture of VCONV and GCONV, and the hyper-parameters.\relax }{table.caption.8}{}}
+\newlabel{tb:npfs@cref}{{[table][2][]2}{[1][7][]8}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Related Work}{8}{section.7}}
+\citation{sss}
+\citation{sss}
+\citation{sss}
+\citation{sss}
+\citation{srivastava2014understanding}
+\citation{balestriero2018spline}
+\citation{neyshabur2015path}
+\bibstyle{plainnat}
+\bibdata{refs}
+\bibcite{arora2019exact}{{1}{2019{}}{{Arora et~al.}}{{Arora, Du, Hu, Li, Salakhutdinov, and Wang}}}
+\bibcite{arora}{{2}{2019{}}{{Arora et~al.}}{{Arora, Du, Hu, Li, and Wang}}}
+\bibcite{balestriero2018spline}{{3}{2018}{{Balestriero et~al.}}{{}}}
+\bibcite{cao2019generalization}{{4}{2019}{{Cao and Gu}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{9}{section.8}}
+\bibcite{dudln}{{5}{2019}{{Du and Hu}}{{}}}
+\bibcite{dudnn}{{6}{2018}{{Du et~al.}}{{Du, Lee, Li, Wang, and Zhai}}}
+\bibcite{sss}{{7}{2019}{{Fiat et~al.}}{{Fiat, Malach, and Shalev{-}Shwartz}}}
+\bibcite{lottery}{{8}{2018}{{Frankle and Carbin}}{{}}}
+\bibcite{ntk}{{9}{2018}{{Jacot et~al.}}{{Jacot, Gabriel, and Hongler}}}
+\bibcite{jacot2019freeze}{{10}{2019}{{Jacot et~al.}}{{Jacot, Gabriel, and Hongler}}}
+\bibcite{lee2019wide}{{11}{2019}{{Lee et~al.}}{{Lee, Xiao, Schoenholz, Bahri, Novak, Sohl-Dickstein, and Pennington}}}
+\bibcite{neyshabur2015path}{{12}{2015}{{Neyshabur et~al.}}{{Neyshabur, Salakhutdinov, and Srebro}}}
+\bibcite{edgepop}{{13}{2019}{{Ramanujan et~al.}}{{Ramanujan, Wortsman, Kembhavi, Farhadi, and Rastegari}}}
+\bibcite{ganguli}{{14}{2013}{{Saxe et~al.}}{{Saxe, McClelland, and Ganguli}}}
+\bibcite{shamir}{{15}{2019}{{Shamir}}{{}}}
+\bibcite{srivastava2014understanding}{{16}{2014}{{Srivastava et~al.}}{{Srivastava, Masci, Gomez, and Schmidhuber}}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Expression for $K^{(d)}$}{11}{appendix.A}}
+\newlabel{sec:kd}{{A}{11}{Expression for $K^{(d)}$}{appendix.A}{}}
+\newlabel{sec:kd@cref}{{[appendix][1][2147483647]A}{[1][11][]11}}
+\newlabel{eq:ntkold}{{2}{11}{Expression for $K^{(d)}$}{equation.A.2}{}}
+\newlabel{eq:ntkold@cref}{{[equation][2][2147483647]2}{[1][11][]11}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Experimental Setup}{11}{appendix.B}}
+\newlabel{sec:expsetup}{{B}{11}{Experimental Setup}{appendix.B}{}}
+\newlabel{sec:expsetup@cref}{{[appendix][2][2147483647]B}{[1][11][]11}}
+\@writefile{toc}{\contentsline {section}{\numberline {C}Applying \Cref  {th:main} In Finite Width Case}{12}{appendix.C}}
+\newlabel{def:equilambda}{{C.2}{12}{}{definition.C.2}{}}
+\newlabel{def:equilambda@cref}{{[definition][2][2147483647,3]C.2}{[1][12][]12}}
+\@writefile{toc}{\contentsline {section}{\numberline {D}Proofs of technical results}{12}{appendix.D}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Deep Gated Network with padding. Here the gating values are padded, i.e., $ G_{x,t}(l,kw+i)=G_{x,t}(l,i),\forall k=0,1,\ldots  ,m-1, i\in [w]$. \relax }}{12}{table.caption.11}}
+\newlabel{tb:dgnpad}{{3}{12}{Deep Gated Network with padding. Here the gating values are padded, i.e., $ G_{x,t}(l,kw+i)=G_{x,t}(l,i),\forall k=0,1,\ldots ,m-1, i\in [w]$. \relax }{table.caption.11}{}}
+\newlabel{tb:dgnpad@cref}{{[table][3][2147483647]3}{[1][12][]12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces DGN${}^{(m)}$ where the value network is of width $mw$ and depth $d$. The gates are derived by padding the gating values obtained from the feature network `$m$' times, i.e., $ G_{x,t}(l,kw+i)=G_{x,t}(l,i),\forall k=0,1,\ldots  ,m-1, i\in [w]$.\relax }}{13}{figure.caption.10}}
+\newlabel{fig:dgnpad}{{4}{13}{DGN${}^{(m)}$ where the value network is of width $mw$ and depth $d$. The gates are derived by padding the gating values obtained from the feature network `$m$' times, i.e., $ G_{x,t}(l,kw+i)=G_{x,t}(l,i),\forall k=0,1,\ldots ,m-1, i\in [w]$.\relax }{figure.caption.10}{}}
+\newlabel{fig:dgnpad@cref}{{[figure][4][2147483647]4}{[1][12][]13}}
+\newlabel{eq:above1}{{3}{13}{Proofs of technical results}{equation.D.3}{}}
+\newlabel{eq:above1@cref}{{[equation][3][2147483647]3}{[1][12][]13}}
+\newlabel{lastlayer}{{7}{14}{Proofs of technical results}{equation.D.7}{}}
+\newlabel{lastlayer@cref}{{[equation][7][2147483647]7}{[1][14][]14}}
+\newlabel{onebefore}{{8}{14}{Proofs of technical results}{equation.D.8}{}}
+\newlabel{onebefore@cref}{{[equation][8][2147483647]8}{[1][14][]14}}
+\newlabel{lm:dot}{{D.1}{15}{}{lemma.D.1}{}}
+\newlabel{lm:dot@cref}{{[lemma][1][2147483647,4]D.1}{[1][15][]15}}
+\newlabel{th:mainrefined}{{D.1}{16}{}{theorem.D.1}{}}
+\newlabel{th:mainrefined@cref}{{[theorem][1][2147483647,4]D.1}{[1][16][]16}}
+\newlabel{eq:kexpect}{{11}{17}{Proofs of technical results}{equation.D.11}{}}
+\newlabel{eq:kexpect@cref}{{[equation][11][2147483647]11}{[1][16][]17}}
+\newlabel{eq:kexpectsquare}{{12}{18}{Proofs of technical results}{equation.D.12}{}}
+\newlabel{eq:kexpectsquare@cref}{{[equation][12][2147483647]12}{[1][17][]18}}
+\newlabel{eq:ksquareexpect}{{13}{18}{Proofs of technical results}{equation.D.13}{}}
+\newlabel{eq:ksquareexpect@cref}{{[equation][13][2147483647]13}{[1][18][]18}}
+\@writefile{toc}{\contentsline {section}{\numberline {E}DGN as a Lookup Table: Applying \Cref  {th:main} to a pure memorisation task}{21}{appendix.E}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces  Memorisation Network. The input is fixed and is equal to $1$. All the internal variables depend on the index $s$ and the parameter $\Theta _t$. The gating values $G$s are external and independent variables.\relax }}{21}{table.caption.12}}
+\newlabel{tb:dgnmemo}{{4}{21}{Memorisation Network. The input is fixed and is equal to $1$. All the internal variables depend on the index $s$ and the parameter $\Theta _t$. The gating values $G$s are external and independent variables.\relax }{table.caption.12}{}}
+\newlabel{tb:dgnmemo@cref}{{[table][4][2147483647]4}{[1][21][]21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Ideal spectrum of $\mathbb  {E}\left [K_0\right ]/d$ for a memorisation network for $n=200$.\relax }}{22}{figure.caption.13}}
+\newlabel{fig:ideal-spectrum}{{5}{22}{Ideal spectrum of $\E {K_0}/d$ for a memorisation network for $n=200$.\relax }{figure.caption.13}{}}
+\newlabel{fig:ideal-spectrum@cref}{{[figure][5][2147483647]5}{[1][21][]22}}
+\newlabel{eq:mat}{{15}{22}{DGN as a Lookup Table: Applying \Cref {th:main} to a pure memorisation task}{equation.E.15}{}}
+\newlabel{eq:mat@cref}{{[equation][15][2147483647]15}{[1][21][]22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Shows the plots for the memorisation network with $\mu =\frac  {1}{2}$ and $\sigma =\sqrt  {\frac  {2}{w}}$. The number of points to be memorised is $n=200$. The left most plot shows the e.c.d.f for $w=25$ and the second plot from the left shows the error dynamics during training for $w=25$. The second plot from the right shows the e.c.d.f for $w=500$ and the right most plot shows the error dynamics during training for $w=500$. All plots are averaged over $10$ runs.\relax }}{22}{figure.caption.14}}
+\newlabel{fig:dgn-frg-gram-ecdf}{{6}{22}{Shows the plots for the memorisation network with $\mu =\frac {1}{2}$ and $\sigma =\sqrt {\frac {2}{w}}$. The number of points to be memorised is $n=200$. The left most plot shows the e.c.d.f for $w=25$ and the second plot from the left shows the error dynamics during training for $w=25$. The second plot from the right shows the e.c.d.f for $w=500$ and the right most plot shows the error dynamics during training for $w=500$. All plots are averaged over $10$ runs.\relax }{figure.caption.14}{}}
+\newlabel{fig:dgn-frg-gram-ecdf@cref}{{[figure][6][2147483647]6}{[1][22][]22}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {E.1}Experiment}{22}{subsection.E.1}}

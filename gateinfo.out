@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Background: Neural Tangent Feature and Kernel}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Our Contributions}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Neural Path Feature and Kernel: Encoding Gating Information}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Paths}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Neural Path Feature, Neural Path Value and Network Output}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.3}{Neural Path Kernel : Similarity based on active sub-networks}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{Dynamics of Gradient Descent with NPF and NPV Learning}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{NPV and NPF Learning}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Gradient Descent}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Deep Gated Networks: Decoupling Neural Path Feature and Value}{}% 11
+\BOOKMARK [1][-]{section.5}{Learning with Fixed NPFs: Role Of Active Sub-Networks}{}% 12
+\BOOKMARK [1][-]{section.6}{Experiments: Fixed NPFs, NPF Learning and Verification of Claim II}{}% 13
+\BOOKMARK [1][-]{section.7}{Conclusion and Future Work}{}% 14
+\BOOKMARK [1][-]{section.8}{Related Work}{}% 15
+\BOOKMARK [1][-]{appendix.A}{Expression for K\(d\)}{}% 16
+\BOOKMARK [1][-]{appendix.B}{Experimental Setup}{}% 17
+\BOOKMARK [1][-]{appendix.C}{Proofs of technical results}{}% 18

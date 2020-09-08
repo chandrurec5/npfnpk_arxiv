@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: gateinfo.aux
+The style file: plainnat.bst
+Database file #1: refs.bib
+Repeated entry---line 104 of file refs.bib
+ : @article{shamir
+ :                ,
+I'm skipping whatever remains of this entry
+You've used 6 entries,
+            2773 wiz_defined-function locations,
+            620 strings with 5853 characters,
+and the built_in function-call counts, 3325 in all, are:
+= -- 299
+> -- 187
+< -- 6
++ -- 63
+- -- 57
+* -- 239
+:= -- 481
+add.period$ -- 18
+call.type$ -- 6
+change.case$ -- 37
+chr.to.int$ -- 6
+cite$ -- 12
+duplicate$ -- 164
+empty$ -- 265
+format.name$ -- 67
+if$ -- 723
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 6
+newline$ -- 38
+num.names$ -- 24
+pop$ -- 84
+preamble$ -- 1
+purify$ -- 31
+quote$ -- 0
+skip$ -- 147
+stack$ -- 0
+substring$ -- 140
+swap$ -- 44
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 66
+warning$ -- 0
+while$ -- 27
+width$ -- 0
+write$ -- 82
+(There was 1 error message)

@@ -1,0 +1,108 @@
+\documentclass{article}
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2020
+
+% ready for submission
+% \usepackage{neurips_2020}
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+%     \usepackage[preprint]{neurips_2020}
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+%     \usepackage[final]{neurips_2020}
+
+% to avoid loading the natbib package, add option nonatbib:
+\usepackage[preprint]{neurips_2020}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{bbm}
+\input{pack.tex}
+\usepackage{hyperref}
+\usepackage{thmtools}
+\usepackage{nameref}
+
+\usepackage[nameinlink,noabbrev,capitalize]{cleveref}
+\crefname{assumption}{assumption}{assumptions}
+\crefname{lemma}{lemma}{lemmas}
+\Crefname{lemma}{Lemma}{Lemmas}
+\crefname{thm}{theorem}{theorems}
+\Crefname{thm}{Theorem}{Theorems}
+
+
+\usepackage{caption}
+\captionsetup{belowskip=0pt}
+\usepackage{wrapfig,lipsum}
+\usepackage[linewidth=1.2pt,linecolor=red]{mdframed}
+
+
+\usepackage{comment}
+\usepackage{cancel}
+\usepackage{changepage}
+\usepackage{bbm}
+\usepackage{pgfplots}
+\usepackage{filecontents}
+\setcounter{MaxMatrixCols}{32}
+\usepackage{placeins}
+
+\title{Neural Path Features and Neural Path Kernel : Understanding the role of gates in deep learning}
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+\author{Chandrashekar Lakshminarayanan and Amit Vikram Singh, \\ Indian Institute of Technology, Palakkad}
+\begin{document}
+\maketitle
+
+\textbf{Introduction:} We consider deep neural networks (DNNs) with rectified linear unit (ReLU) activations. A special property of ReLU activations is that they can also be thought of as \emph{gates}, which are $1/0$ (i.e., on/off) depending on whether or not their pre-activation input is positive or negative. While the weights remain the same across input examples, the $1/0$ state of the gates change across input examples. For each input example, there is a corresponding \emph{active} sub-network comprising of those gates which are $1$, and the weights which pass through such gates. This active sub-network can be said to hold the memory for a given input, i.e., only those weights that pass through such active gates contribute to the output. In this viewpoint, at random initialisation of the weights, for a given input example, a random sub-network is active and produces a random output.  However, as the weights change during training (say via gradient descent), the $1/0$ states of the gates, and hence the active sub-networks corresponding to the various input examples also change. At the end of training, for each input example, there is a learned active sub-network, and produces the learned output. Thus, the gates could potentially contain valuable information.
+
+In this paper, our aim is to understand the role of the gates, and the dynamics of gate activity while training DNNs using gradient descent. Our findings can be summarised in the following claims which we theoretically/experimentally justify in the paper:
+
+\emph{Claim $1$: The information in the gates of a DNN is captured in its active sub-networks.}
+
+\emph{Claim $2$: Dynamics of gates is key for generalisation.}
+
+\textbf{Notation:} We consider fully-connected DNNs with $w$ hidden units per layer and $d-1$ hidden layers. The DNN accepts an input $x\in\R^{d_{in}}$ and produces an output $\hat{y}_{\Theta}(x)\in\R$, where $\Theta\inrdnet$ are the network parameters ($d_{net}=d_{in}w+(d-2)w^2+w$). We denote by $\Theta(l,j,i)$ the weight connecting the $j^{th}$ hidden unit of layer $l-1$ to the $i^{th}$ hidden unit of layer $l\in[d]$. The dataset is given by $(x_s,y_s)_{s=1}^n\in\R^{d_{in}}\times \R$. The loss function is given by $L_{\Theta}=\frac{1}{2}\sum_{s=1}^n \left(\hat{y}_{\Theta}(x_s)-y_s\right)^2$. We consider the gradient descent update given by $\Theta_t=\Theta_t-\alpha_t (\nabla_{\Theta} L_{\Theta})$, where $\alpha_t>0$ is a small step-size and $\nabla_{\Theta}(\cdot)$ stands for the gradient of $(\cdot)$ with respect to the network parameters. We denote the set $\{1,\ldots, n\}$ by $[n]$. We use vectorised notations: $y=(y_s,s\in[n]), \hat{y}_{\Theta}=\left(\hat{y}_{\Theta}(x_s), s\in[n]\right)\in\R^n$ for the true and predicted outputs and $e_{\Theta}= (\hat{y}_{\Theta}-y)\in\R^n$ for the error in the prediction.
+
+\textbf{Background:} The \emph{neural tangent feature and kernel} (NTF and NTK) machinery was developed in some the recent works[\citenum{ntk, arora2019exact,cao2019generalization,dudnn}] on optimisation and generalisation in DNNs trained using gradient descent. For an input $x\in\R^{d_{in}}$, the NTF is given by $\psi_{x,\Theta}(x)=\nabla_{\Theta}\hat{y}_{\Theta}(x)$, i.e.,  the gradient of the network output with respect to its weights. The NTK matrix on the dataset is the $n\times n$ Gram matrix of the NTFs of the input examples, and is given by $K_{\Theta}(s,s')=\ip{\psi_{x_s,\Theta},\psi_{x_{s'},\Theta}}, s,s'\in[n]$. For infinitesimally small step-size $\alpha_t>0$ of GD procedure, the dynamics of error term can be written as $\dot{e}_t=-K_{\Theta_t} e_t$. 
+%Since $K_{\Theta}$ is real symmetric, there is always a unitary transformation under which it can be diagonalised, as a result of which, convergence is ensured if the minimum eigenvalues of $\rho_{\min}(K_{\Theta_t})$ are strictly bounded away from $0$.
+
+\textbf{Neural Path Features: Encoding Gating Information} The gating property of the ReLU activation allows us to express the output of the network as a summation of the contribution of the individual paths. The contribution of a path is the product of the signal in its input node, the $d$ weights in the path and the $(d-1)$ gates in the path. In what follows, we encode the gating information in a novel \emph{neural path feature} (NPF), and the weights in a novel \emph{neural path value} (NPV). The NPF and NPV are vectors whose dimension is equal to the total number of paths. The NPF co-ordinate of a path is the product of the signal at its input node and the gates in the path. The NPV co-ordinate of a path is the product of the weights in the paths. This allows us to express the output of the DNN as an inner product of the NPFs and NPVs. Note, that while the NPV is a constant across inputs, the NPF changes since ($1/0$ states of) the gates change across input. 
+
+\textbf{Dynamics of Gates Within GD dynamics} We saw in \Cref{sec:background} that the GD dynamics is dictated by $K_{\Theta}$. Since the expression \eqref{eq:zero} for $\hat{y}_{\Theta}$ contains the gating information encoded in it via the NPF, using $\hat{y}_{\Theta}$ to the NTF $\psi_{x,\Theta}=\nabla_{\Theta}$ and subsequently $K_{\Theta}$, we can capture the dynamics of gates within GD dynamics. 
+
+An important point to note here is that the derivative of the standard ReLU gates with respect to its pre-activation is almost surely $0$. As a result, gradient of the gates to the network parameters is also $0$, and hence the dynamics of the gates cannot be captured. We remedy this by the use of \emph{soft-ReLU} gates, where the gating and activations are given by $\gamma_{sr}(q)=\frac{1}{\left(1+\exp(-\beta \cdot q)\right)}, \beta>0$, and the activation is given by $\chi_{sr}(q)=q\cdot \gamma_{sr}(q)$. The derivative of \emph{soft-ReLU} gating with respect to the pre-activation is given by $\partial_{q}\gamma_{sr}(q)=\frac{\beta}{\left(1+\exp(\beta\cdot q)\right)\left(1+\exp(-\beta\cdot q)\right)}$.
+
+
+
+\textbf{Decoupling Gating Dynamics} We encoded the gating information in the NPFs, and we saw that the decompositions of $\psi_{x,\Theta}=\psiv_{x,\Theta}+\psiv_{x,\Theta}$ and $K_{\Theta}=\kv+\kf+\kc$ captured terms related to NPF dynamics (and hence gating dynamics). However, from \Cref{prop:basic}, it is only known that $K_{\Theta}$ as a whole dictates GD dynamics. Thus, in order to ascertain that NPF learning terms $\psiv$, $\kf$ indeed make a difference, we should be able to separate them out (from $\psi$and $K_{\Theta}$), and measure the generalisation performance with and without NPF learning terms. This separation can be achieved by a deep gated network (see \Cref{fig:dgn} below for details) having two networks of identical architecture namely i) a feature network parameterised by $\Tg\inrdnet$, that holds gating information, and hence the NPFs and ii) a value network that holds the NPVs parameterised by $\Tv\inrdnet$.  By making $\Tg\inrdnet$ trainable/non-trainable, we can have \emph{on/off} NPF learning (and gating dynamics).
+
+\textbf{Measure of Information in Gates: Neural Path Kernel and Active Sub-Networks}
+We now provide theoretical justification for ``Claim $1$'', i.e., the information in the gates of a DNN is captured in its active sub-networks. Suppose we have a DNN with parameter $\bar{\Theta}\inrdnet$, and we want to measure the information in the gates of this DNN. One way to accomplish this task is to set $\Tg_t=\bar{\Theta},\forall t\geq 0$ in the DGN framework and train $\Tv\inrdnet$ using gradient, i.e., use the fixed NPF obtained from $\bar{\Theta}$ and learn only the NPVs. The generalisation performance of this fixed NPF learner can then be used as a measure of the information in the gates of the DNN with parameter $\bar{\Theta}$.  From prior results in [\citenum{arora2019exact,cao2019generalization}], and the result in \Cref{th:main}, it follows that, in the limit of `large-width', the performance of the FNPF learning is tied down to its associated \emph{neural path kernel} (NPK). ``Claim $1$' is justified by further noting that the NPK can be written as a \emph{Hadamard} product of the input data Gram matrix and a correlation matrix of active sub-networks.
+
+
+\textbf{Experiments} In this section, we experimentally verify ``Claim $2$'', that is, dynamics of the gates is key for generalisation. We compare the performance of the following networks i) fixed random (FR): we randomly initialise both $\Tg_0,\Tv_0$, but train only $\Tv$, ii) fixed learnt (FL): we initialise $\Tv_0$ randomly, and copy weights from a pre-trained ReLU network (of identical architecture) into $\Tg_0$, iii) decoupled earning (DL):  we randomly initialise both $\Tg_0,\Tv_0$, and train both $\Tg$ and $\Tv$, iv) Standard ReLU (ReLU).  The results of our experiments can be summarised as below:
+
+$1.$ FR trains and generalises, but ReLU and DL perform better.
+
+$2.$ DL performs better than FR, but poorly in comparison to ReLU.
+
+$3.$ FL with weights copied from a fully trained ReLU performs almost as good as ReLU. Further, the performance gap between FR and ReLU is continuous: we divide the training of the pre-trained ReLU into $6$ stages, where stage-$0$ is initialisation, and stage-$6$ is full training. We copy the weights at various stages of training to setup $6$ different FLs, i.e., FL-$0$ to FL-$6$. We observe that the performance of FL-$0$ to FL-$6$ increases monotonically, with FL-$0$ performing as well as only FR,  and FL-$6$ performing as well as ReLU. 
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

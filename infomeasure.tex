@@ -1,0 +1,29 @@
+\section{Learning with Fixed NPFs: Role Of Active Sub-Networks}\label{sec:infomeasure}
+In this section, we provide theoretical justification for ``Claim I'', i.e., the active sub-networks are fundamental entities in DNNs. 
+% Consider a DNN parameterised by $\bar{\Theta}\inrdnet$. At randomised initialisation, we can obtain random NPFs $\Phi_{\bar{\Theta}_0}$, and after training for $T$ epochs, and we can obtained learnt NPFs $\Phi_{\bar{\Theta}_T}$. One way to measure the difference between random NPFs and learnt NPFs is to keep the respective NPFs fixed (by storing them in a feature network) and only learn the NPVs. We now present an assumption and result on learning with fixed NPFs.
+%\begin{comment}
+\begin{definition}\label{def:gateinfo}
+Define the measure of information stored in the gates of a \emph{DNN} with parameter $\bar{\Theta}\inrdnet$ to be the generalisation performance of a \emph{DGN} with identical architecture operated in the \emph{FNPF} mode whose $\Tg_0=\bar{\Theta}$ are non-trainable, and $\Tv\inrdnet$ are trained.
+\end{definition}
+Consider a DNN parameterised by $\bar{\Theta}\inrdnet$. At randomised initialisation, we can obtain random NPFs $\Phi_{\bar{\Theta}_0}$, and after training for $T$ epochs, and we can obtain learnt NPFs $\Phi_{\bar{\Theta}_T}$. 
+%Suppose we train a standard DNN for $T$ epochs, and say the parameter at end of training is $\bar{\Theta}_T$. In this case, the relation learnt is $\hat{y}_{\bar{\Theta}_T}=\Phi_{\bar{\Theta}_T}v_{\bar{\Theta}_T}$. 
+Thus, while measuring information in the gates of this trained DNN, as per \Cref{def:gateinfo}, we are retaining $\Phi_{\bar{\Theta}_T}$ by storing the weights as $\Tg_0=\bar{\Theta}_T$ in the feature network, and discarding $v_{\bar{\Theta}_T}$, and re-training $\Tv$ to learn a new relation $\hat{y}_{\Tdgn}=\Phi^\top_{\Tg_0}v_{\Tv}=\Phi^\top_{\bar{\Theta}_T}v_{\Tv}$. Similarly, in the case of random NPFs we are learning the relation, $\hat{y}_{\Tdgn}=\Phi^\top_{\Tg_0}v_{\Tv}=\Phi^\top_{\bar{\Theta}_0}v_{\Tv}$. In what follows, we use $H_{\text{FNFP}}$ to refer to $H_{\Tg_0}$.
+%\end{comment}
+\begin{assumption}\label{assmp:main}
+(i) $\Tv_0\inrdnet$ is statistically independent of the fixed NPFs (stored in $\Tg_0\inrdnet$ of the feature network), (ii) $\Tv_0$ are sampled i.i.d from symmetric Bernoulli over $\{-\sigma,+\sigma\}$.
+\end{assumption}
+%\textbf{Remark:} Thus at initialisation as per \Cref{assmp:main} the NPFs and NPV are statistically independent. In what follows, we use $H_{\text{FNFP}}$ to refer to $H_{\Tg_0}$.
+\begin{theorem}\label{th:main} Under \Cref{assmp:main}, as $w\ra\infty$, $K_{\Tdgn_0}\ra K^{(d)}_{\text{FNPF}} =d\cdot \sigma^{2(d-1)} H_{\text{FNPF}}$.%=d\cdot \Sigma\odot\bar{\Lambda}_{\Tg_0}$, where $\bar{\Lambda}_{\Tg_0}=\sigma^{2(d-1)}\Lambda_{\Tg_0} $.
+\end{theorem}
+\begin{comment}
+\begin{theorem}\label{th:main} Let be $H_{\Tg_0}\stackrel{def}= \Phi^\top_{\Tg_0}\Phi_{\Tg_0}$ be the NPK matrix. As $w\ra\infty$, $K_{\Tdgn_0}\ra d \sigma^{2(d-1)} H_{\Tg_0} $.
+%(ii) In addition, if ${4d}/{w^2}<1$, then $Var\left[K_0\right]\leq O\left(d^2_{in}\sigma^{4(d-1)}\max\{d^2w^{2(d-2)+1}, d^3w^{2(d-2)}\}\right)$.
+\end{theorem}
+\end{comment}
+$\bullet$ \textbf{Active Sub-Network:} From previous results \cite{arora2019exact}, it follows that as $w\ra\infty$, the optimisation and generalisation properties of the fixed NPF learner can be tied down to the infinite width NTK of the FNPF learner $K^{(d)}_{\text{FNPF}}$ and hence to $H_{\text{FNPF}}$ (treating $d\sigma^{2(d-1)}$ as a scaling factor).  We can further breakdown $H_{\text{FNPF}}=\Sigma\odot{\Lambda}_{\text{FNPF}}$, where $\Lambda_{\text{FNPF}}=\Lambda_{\Tg_0}$. This justifies ``Claim I''. 
+
+$\bullet$ $K^{(d)}$ in prior works [\citenum{ntk,arora2019exact,cao2019generalization}] essentially becomes $K^{(d)}_{\text{FNPF}}$ under \Cref{assmp:main}.  To understand this, let us consider a DNN with weights $\Theta\inrdnet$. From  [\citenum{ntk,arora2019exact,cao2019generalization}] it follows that under randomised initialisation of $\Theta_0\inrdnet$ as $w\ra\infty$ the NTK of the DNN  $K_{\Theta_0}\ra K^{(d)}$. The simplification of $K^{(d)}$ to $K^{(d)}_{\text{FNPF}}$ in \Cref{th:main} occurs when we copy these random NPFs corresponding to $\Theta_0\inrdnet$ into the feature network and keep them fixed, i.e., $\Tg_t=\Tg_0=\Theta_0\inrdnet,t\geq 0$, and train $\Tv\inrdnet$ with initialisation as per \Cref{assmp:main}.
+ 
+ $\bullet$ \textbf{Choice of $\sigma$:} In the case of random NPFs obtained by initialising $\Tg_0$ at random by sampling from a symmetric distribution, we expect $\frac{w}2$ gates to be on every layer, so $\sigma=\sqrt{\frac{2}{w}}$ is a normalising choice, in that, the diagonal entries of $\sigma^{2(d-1)}{\Lambda}_{\text{FNPF}}(s,s)\approx 1$ in this case.
+
+$\bullet$ We discuss a more detailed version of \Cref{th:main} in the Appendix, where we discuss the role of width and depth on a pure memorisation task.

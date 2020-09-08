@@ -1,0 +1,73 @@
+\section{Dynamics of Gradient Descent with NPF and NPV Learning}\label{sec:gatedyna}
+In \Cref{sec:path}, we mentioned that during gradient descent, the DNN is learning a relation $\hat{y}_{\Theta}=\Phi^\top_{\Theta} v_{\Theta}$, i.e., both the NPFs and the NPV are learnt. In this section, we connect the newly defined quantities, i..e, $\Phi_{\Theta}$ and $v_{\Theta}$ to the NTK matrix $K_{\Theta}$ (see \Cref{prop:ntknew}), and re-write the gradient descent dynamics in \Cref{prop:dnnhard} taking into account of NPF and NPV learning.
+%Also, recall that $\psi_{x_s,\Theta}=(\partial_{\theta}\hat{y}_{\Theta}(x_s),\theta\in\Theta)$ and $K_{\Theta}(s,s')=\ip{}$
+%In this section, we re-write \Cref{prop:basic} in \Cref{prop:dnnhard,prop:dnnsoft}, wherein, in addition to the dynamics of the weights ($\dot{\Theta}_t$) and the error ($\dot{e}_t$), we also capture the dynamics of the NPF (i.e., dynamics of the gates) and the NPV during GD. %Since the NPFs encode the states of the gates, the dynamics of the gates is accounted by accounting for the dynamics of NPFs.
+\begin{comment}
+\begin{proposition}
+Define $\psiv_{x,\Theta}\stackrel{def}=\left(\ip{\phi_{x,\Theta}, \partial_{\theta} v_{\Theta}},\theta\in\Theta\right)\in\R^{d_{net}}$ and $\psif_{x,\Theta}\stackrel{def}=\left(\ip{\partial_{\theta}\phi_{x,\Theta}, v_{\Theta}},\theta\in\Theta\right)\in\R^{d_{net}}$. It follows that 
+$\psi_{x,\Theta}=\psiv_{x,\Theta}+\psif_{x,\Theta}$.
+\end{proposition}
+\begin{proposition}
+In DNNs with ReLU gates, $\psif_{x,\Theta}=0,\forall x\in\R^{d_{in}}, \Theta\in\R^{d_{net}}$.
+\end{proposition}
+\end{comment}
+\subsection{NPV and NPF Learning}
+\begin{definition}\label{def:npvgrad}
+The gradient of the NPV of path $p$ is defined as $\varphi_{p,\Theta}\stackrel{def}=(\partial_{\theta}v_{\Theta}(p), \theta \in\Theta)\in\R^{d_{net}}$.
+\end{definition}
+\textbf{Remark} The change of the NPV is given by $\dot{v}_{\Theta_t}(p)=\ip{\varphi_{p,\Theta_t},\dot{\Theta}_t}$, where $\dot{\Theta}_t$ is the change of the weights. We now collect the gradients $\varphi_{p,\Theta}$ of all the paths to define a \emph{value tangent kernel} (VTK). 
+\begin{definition}
+Let $\nabla_{\Theta}v_{\Theta}$ be a $d_{net}\times P$ matrix of NPV derivatives given by $\nabla_{\Theta}v_{\Theta}=(\varphi_{p,\Theta},p\in[P])$. Define the VTK to be the $P\times P$ matrix given by $\V_{\Theta}=(\nabla_{\Theta}v_{\Theta})^\top(\nabla_{\Theta}v_{\Theta})$.
+\end{definition}
+\textbf{Remark} An important point to note here is that the VTK is a quantity that is dependent only on the weights. To appreciate the same, consider a deep linear network (DLN) [\citenum{shamir,dudln}] which has identity activations, i.e., all the gates are $1$ for all inputs, and weights. For a DLN and DNN with identical network architecture (i.e., $w$ and $d$), and identical weights, $\V_{\Theta}$ is also identical. Thus, $\V_{\Theta}$ is the gradient based information that excludes the gating information.
+%\subsection{NPF Learning}
+
+The NPFs changes at those time instants when any one of the gates switches from $1$ to $0$ or from $0$ to $1$. In the time between two such switching instances, NPFs of all the input examples in the dataset remain the same, and between successive switching instances,  the NPF of at least one of the input example in the dataset changes. In what follows, in \Cref{prop:dnnhard} we re-write \Cref{prop:basic} taking into account the switching instances which we define in \Cref{def:switch}.
+\begin{definition}\label{def:switch}
+Define a sequence of monotonically increasing time instants $\{T_{i}\}_{i=0}^\infty$ (with $T_0=0$) to be `switching' instants if $\phi_{x_s,\Theta_t}=\phi_{x_s,\Theta_{T_i}},\forall s\in[n],\forall t\in[T_{i},T_{i+1}), i=0,\ldots,\infty$, and  $\forall i=0,\ldots, \infty$ $\exists s(i)\in[n]$ such that $\phi_{x_{s(i)},\Theta_{T_i}}\neq \phi_{x_{s(i)},\Theta_{T_{i+1}}}$.
+\end{definition}
+\subsection{Gradient Descent}
+\begin{proposition}\label{prop:ntknew}
+The NTK is given by $K_{\Theta}=\Phi^\top_{\Theta}\V_{\Theta}\Phi_{\Theta}$.
+\end{proposition}
+\textbf{Remark} $K_{\Theta_t}$ changes during training (i) continuously at all $t\geq 0$ due to $\V_{\Theta_t}$, and (ii) at switching instants $T_{i},i=0,\ldots,\infty$ due to the change in $\Phi_{\Theta_{T_i}}$. We now describe the gradient descent dynamics taking into the dynamics of the NPV and the NPFs.
+\begin{comment}
+\textbf{Remark:} The NTK matrix is given by $K_{\Theta}(s,s')=\ip{\psi_{x_s,\Theta},\psi_{x_{s'},\Theta}}, s, s'\in[n]$ and can be further decomposed as:
+\begin{align}\label{eq:kerneldecomp}
+K_{\Theta}(s,s')=\underbrace{{\kv(s,s')}}_{\ip{\psiv_{x_s,\Theta},\psiv_{x_{s'},\Theta}}}+\underbrace{\kf(s,s')}_{\ip{\psif_{x_s,\Theta},\psif_{x_{s'},\Theta}}}+\underbrace{\kc(s,s')}_{\ip{\psiv_{x_s,\Theta},\psif_{x_{s'},\Theta}}+\ip{\psif_{x_s,\Theta},\psiv_{x_{s'},\Theta}}}
+\end{align}
+\end{comment}
+\begin{proposition}\label{prop:dnnhard}
+Let $\{T_i\}_{i=0}^\infty$ be as in \Cref{def:switch}. For $t\in[T_{i},T_{i+1})$ and small step-size of GD:
+\FloatBarrier
+\begin{table}[h]
+\centering
+\begin{tabular}{ l c l l l }
+Weights Dynamics &:  & $\dot{\Theta}_t$&$=$&$-\sum_{s=1}^n \psi_{x_s,\Theta_t}e_t(s)$\\
+NPV Dynamics&: & $\dot{v}_{\Theta_t}(p)$&$=$&$\ip{\varphi_{p,\Theta_t},\dot{\Theta}_t},\forall p\in[P]$\\
+%Kernel &:& $K_{\Theta_t}$&$=$&$\Phi^\top_{\Theta_{T_i}}\V_{\Theta_t}\Phi_{\Theta_{T_i}}$\\
+Error Dynamics&: & $\dot{e}_t$&$=$&$-K_{\Theta_t}e_t$, where $K_{\Theta_t}=\Phi^\top_{\Theta_{T_i}}\V_{\Theta_t}\Phi_{\Theta_{T_i}}$\\
+\end{tabular}
+\end{table}
+\end{proposition}
+\begin{proposition}\label{prop:condition}
+ $\rho_{min}(K_{\Theta})\leq \rho_{\min}(H_{\Theta})\rho_{\max}\left(\V_{\Theta}\right)$.
+\end{proposition}
+\textbf{Remark} For the NTK to be well conditioned, it is necessary for the NPK to be well conditioned. This is quite intuitive, in that, the closer two inputs are, the closer are their NPFs, and it is harder to train the network to produce arbitrarily different outputs for such inputs that are very close to one another.
+\begin{comment}
+%\subsection{Gradient Descent Dynamics in DNN with Soft-ReLU}
+We can further simplify (i.e., without using switching instances) the dynamics of GD by using a `soft-ReLU' gate $\gamma_{sr}(q)=\frac{1}{\left(1+\exp(-\beta \cdot q)\right)}, \beta>0$, whose derivative its pre-activation is given by $\partial_{q}\gamma_{sr}(q)=\frac{\beta}{\left(1+\exp(\beta\cdot q)\right)\left(1+\exp(-\beta\cdot q)\right)}$. 
+\begin{proposition}\label{prop:dnnsoft} For an infinitesimally small step-size of GD, the error dynamics  of a DNN with soft-ReLU gates is given by:
+\FloatBarrier
+\begin{table}[h]
+\centering
+\begin{tabular}{| l | lll |}\hline
+Weights  & $\dot{\Theta}_t$&$=$&$-\sum_{s=1}^n \psi_{x_s,\Theta_t}e_t(s)=\sum_{s=1}^n (\psiv_{x_s,\Theta_t}+\psif_{x_s,\Theta_t})e_t(s)$\\
+NPF & $\dot{\phi}_{x_s,\Theta_t}(p)$&$=$&$x(\I_0(p))\sum_{\theta\in\Theta}\partial_{\theta}A_{\Theta_t}(x_s,p)\dot{\theta}_t,\forall p\in[P], s\in[n]$\\
+NPV & $\dot{v}_{\Theta_t}(p)$&$=$&$\sum_{\theta\in\Theta}\partial_{\theta}v_{\Theta_t}(p)\dot{\theta}_t,\forall p\in[P]$\\
+Error & $\dot{e}_t$&$=$&$-K_{\Theta_t}e_t$, where $K_{\Theta}=\kv+\kf+\kc$\ \\\hline
+\end{tabular}
+\end{table}
+\end{proposition}
+\textbf{Remark:} Thanks to the soft-ReLU trick, we are able to capture the NPF learning via $\dot{\phi}_{x_s,\Theta_t}$ term.
+\end{comment}

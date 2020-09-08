@@ -1,0 +1,23 @@
+\subsection{Background: Neural Tangent Feature and Kernel}\label{sec:background}
+The NTF and NTK machinery was developed in some of the recent works [\citenum{ntk, arora2019exact,cao2019generalization,dudnn}] to understand optimisation and generalisation in DNNs trained using GD. For an input $x\in\R^{d_{in}}$, the NTF is given by $\psi_{x,\Theta}=\nabla_{\Theta}\hat{y}_{\Theta}(x)\inrdnet$, i.e.,  the gradient of the network output with respect to its weights. The NTK matrix $K_{\Theta}$ on the dataset is the $n\times n$ Gram matrix of the NTFs of the input examples, and is given by $K_{\Theta}(s,s')=\ip{\psi_{x_s,\Theta},\psi_{x_{s'},\Theta}}, s,s'\in[n]$. 
+\begin{proposition}[\textbf{Lemma 3.1} \cite{arora2019exact}]\label{prop:basic}
+Consider the GD procedure to minimise the  squared loss $L(\Theta)$ with infinitesimally small step-size: $\dot{\Theta}_t=-\nabla_{\Theta}L_{\Theta_t} $. If follows that the dynamics of the error term can be written as $\dot{e}_t=-K_{\Theta_t} e_t$. 
+\end{proposition}
+
+\textbf{Prior works} [\citenum{ntk,dudnn,arora2019exact,cao2019generalization}] have studied DNNs trained using GD in the so called `NTK regime', which occurs under appropriate randomised initialisation, and when the width of the DNN approaches infinity. The characterising property of the NTK regime is that as $w\ra\infty$, $K_{\Theta_0}\ra K^{(d)}$, and $K_{\Theta_t}\approx K_{\Theta_0}$, where $K^{(d)}$ (see \eqref{eq:ntkold} in \Cref{sec:kd}) is a deterministic matrix whose superscript $(d)$ denotes the depth of the DNN. 
+\begin{comment}
+The $K^{(d)}$ matrix is computed by the recursion in \eqref{eq:ntkold}.
+\begin{align}\label{eq:ntkold}
+&\tilde{K}^{(1)}(s,s')=\Sigma^{(1)}(s,s')=\Sigma(s,s'), M^{(l)}_{ss'}=\left[\begin{matrix}\Sigma^{(l)}(s,s) & \Sigma^{(l)}(s,s')\\ \Sigma^{(l)}(s',s) & \Sigma^{(l)}(s',s')\end{matrix}\right]\in \R^2,\\
+&\Sigma^{(l+1)}(s,s')= 2\cdot\mathbb{E}_{(q,q')\sim N(0,M_{ss'}^{(l)})} \left[\chi(q)\chi(q')\right], \hat{\Sigma}^{(l+1)}(s,s')= 2\cdot\mathbb{E}_{(q,q')\sim N(0,M_{ss'}^{(l)})}\left[\partial\chi(q)\partial{\chi}(q')\right],\nn\\
+&\tilde{K}^{(l+1)}=\tilde{K}^{(l)}\odot \hat{\Sigma}^{(l+1)}+\Sigma^{(l+1)}, K^{(d)}=\left(\tilde{K}^{(d)}+\Sigma^{(d)}\right)/2
+\end{align}
+where $s,s'\in[n]$ are two input examples in the dataset, $\Sigma$ is the data Gram matrix, $\partial{\chi}$ stands for the derivative of the activation function with respect to the pre-activation input, $N(0,M)$ stands for the mean-zero Gaussian distribution with co-variance matrix $M$.
+\end{comment}
+\cite{arora2019exact} show that infinite width DNN trained using GD is equivalent to kernel regression with the limiting NTK matrix $K^{(d)}$ (and hence enjoys the generalisation ability of the limiting NTK matrix $K^{(d)}$). Further, \cite{arora2019exact} propose a pure kernel method based on what they call the CNTK, which is the limiting NTK matrix $K^{(d)}$ for an infinite width convolutional neural network (CNN). \cite{cao2019generalization} show that in the NTK regime, a DNN is almost a linear learner with the random NTFs at initialisation, and show a generalisation bound in the form of $\tilde{\mathcal{O}}\left(d\cdot\sqrt{y^\top {\left(K^{(d)}\right)}^{-1} y/n}\right)$\footnote{$a_t=\mathcal{O}(b_t)$ if $\lim\sup_{t\ra\infty}|a_t/b_t|<\infty$, and $\tilde{\mathcal{O}}(\cdot)$ is used to hide logarithmic factors in $\mathcal{O}(\cdot)$.}. 
+
+\textbf{Open Question:} \cite{arora2019exact} report a $5\% - 6\%$ performance gain of finite width CNNs (which do not operate in the NTK regime) over the exact CNTKs corresponding to infinite width CNNs, and infer that the study of DNNs in the NTK regime cannot fully explain the success of practical neural networks yet. Can we explain the reason for the performance gain of CNNs over CNTK?%Based on this performance gap they infer that finite width is beneficial and and that the study of DNNs in the NTK regime cannot fully explain the success of practical neural networks yet. Can we explain the reason for the performance gain of CNNs over CNTK?
+
+\begin{comment}
+Fourth, we find that there is still a $5\% - 6\%$ performance gap between CNTKs and CNNs. Since CNTKs exactly correspond to infinitely wide CNNs, this performance gap implies that finite width has its benefits. Therefore, it is likely that recent theoretical work on over-parameterization that operates in the NTK regime cannot fully explain the success of neural networks yet, and we believe it is an interesting open problem to characterize this gap.
+\end{comment}

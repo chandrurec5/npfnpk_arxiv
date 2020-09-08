@@ -1,0 +1,28 @@
+\input{npkexample}
+\subsection{Neural Path Kernel : Similarity based on active sub-networks}
+\begin{comment}
+\begin{definition}\label{def:lambda}
+For input examples $s, s'\in[n]$ define 
+
+$1.$ $\tau_{\Theta}(s,s',l)\stackrel{def}=\sum_{i=1}^w G_{x_s,\Theta}(l,i)G_{x_{s'},\Theta}(l,i)$ be the number of activations that are ``on'' for both inputs $s,s'\in[n]$ in layer $l\in[d-1]$.
+
+$2.$ $\Lambda_{\Theta}(s,s')\stackrel{def}=\Pi_{l=1}^{d-1}\tau_{\Theta}(s,s',l)$.
+\end{definition}
+\end{comment}
+\begin{definition}\label{def:lambda}
+ For input examples $s,s'\in[n]$, define $\A_{\Theta}(s,s')\stackrel{def}=\{p\in[P]\colon A_{\Theta}(x_s,p)= A_{\Theta}(x_{s'},p)=1\}$ to be the set of `active' paths for both $s,s'$  and $\Lambda_{\Theta}(s,s')\stackrel{def}=\frac{|\A_{\Theta}(s,s')|}{d_{in}}$.
+\end{definition}
+\textbf{Remark:} Owing to the symmetry of a DNN, the same number of active paths start from any fixed input node. In \Cref{def:lambda}, $\Lambda_{\Theta}$ measures the size of the active sub-network as the total number of active paths starting from any fixed input node. For examples $s,s'\in[n],s\neq s'$, $\Lambda_{\Theta}(s,s)$ is equal to the size of the sub-network active for $s$, and $\Lambda_{\Theta}(s,s')$ is equal to the size of the sub-network active for both $s$ and $s'$. For an illustration of NPFs and $\Lambda$ please see \Cref{fig:npkexample}.
+%For a given example $s\in[n]$, $\Lambda_{\Theta}(s,s)$ is equal to the total number of active paths for that input example divided by the number of input nodes (i.e., $d_{in}$), and for different input examples $s,s'\in[n]$ it is equal to the total number of paths in the sub-network that is active for both examples $s,s'\in[n]$, divided by the number of input nodes (i.e., $d_{in}$).
+\begin{lemma}\label{lm:npk}
+Let $H_{\Theta}\stackrel{def}{=}\Phi^\top_{\Theta}\Phi_{\Theta}$ be the NPK matrix, and $\Lambda_{\Theta}\in\R^{n\times n}$ be as in \Cref{def:lambda} . It follows that $H_{\Theta}= \Sigma\odot\Lambda_{\Theta}$, where $\odot$ is  the Hadamard product, and $\Sigma$ is the input Gram matrix.
+\end{lemma}
+\begin{comment}
+\begin{proposition}
+For any $s,s'\in[n]$, such that $s\neq s'$ we have: 
+
+$1.$ $\Theta_0\inrdnet$ be a randomised initialisation of weights from a symmetric distribution with zero mean, then $\forall l\in[d-1], \frac{\tau_{\Theta_0}(s,s,l)}{w}\ra\frac{1}{2}$ as $w\ra\infty$, and $\left(\frac{2}{w}\right)^{(d-1)}\Lambda_{\Theta_0}(s,s)\ra1$.
+
+$2.$ $\frac{\tau_{\Theta}(s,s',l)}{\tau_{\Theta}(s,s,l)}\leq 1,\forall l\in[d-1]$, and hence$ \frac{\Lambda_{\Theta}(s,s')}{\Lambda_{\Theta}(s,s)}$ is non-increasing.
+\end{proposition}
+\end{comment}
